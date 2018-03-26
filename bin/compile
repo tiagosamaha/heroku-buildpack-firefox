@@ -14,7 +14,7 @@ PLATFORM=linux64
 ARCHIVE_NAME=firefox
 ARCHIVE_NAME2=geckodriver
 FILE_NAME=${ARCHIVE_NAME}-${VERSION}.tar.bz2
-FILE_NAME2=${ARCHIVE_NAME2}.tar.gz
+FILE_NAME2="geckodriver-v0.20.0-linux64".tar.gz
 BUILDPACK_FIREFOX_PACKAGE="https://download.mozilla.org/?product=firefox-${VERSION}-SSL&os=${PLATFORM}&lang=${LANG}"
 BUILDPACK_GECKODRIVER_PACKAGE="https://github.com/mozilla/geckodriver/releases/download/v0.20.0/geckodriver-v0.20.0-arm7hf.tar.gz"
 
