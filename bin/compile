@@ -44,3 +44,10 @@ mkdir -p $CACHE_DIR/$ARCHIVE_NAME_GECKO
 tar -xzf $CACHE_DIR/$FILE_NAME_GECKO -C $CACHE_DIR
 mv $CACHE_DIR/$ARCHIVE_NAME_GECKO $BUILD_DIR/vendor/
 
+echo "----> Setting paths"
+mkdir -p $BUILD_DIR/.profile.d
+cat <<EOF >$BUILD_DIR/.profile.d/000_paths.sh
+export PATH="\$BUILD_DIR/vendor/firefox:\$BUILD_DIR/vendor/geckodriver:\$PATH"
+export LD_LIBRARY_PATH="\$BUILD_DIR/vendor/firefox:\$BUILD_DIR/vendor/geckodriver:\$LD_LIBRARY_PATH"
+export TMPDIR="\$BUILD_DIR/tmp"
+EOF
