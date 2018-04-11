@@ -1,4 +1,5 @@
 #!/bin/sh
 
 echo "firefox"
+echo "geckodriver"
 exit 0
