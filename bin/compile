@@ -42,7 +42,7 @@ mv $CACHE_DIR/$ARCHIVE_NAME $BUILD_DIR/vendor/
 echo "-----> Extracting Geckodriver binaries to ${BUILD_DIR}/vendor/${ARCHIVE_NAME_GECKO}"
 mkdir -p $CACHE_DIR/$ARCHIVE_NAME_GECKO
 tar -xzf $CACHE_DIR/$FILE_NAME_GECKO -C $CACHE_DIR
-mv $CACHE_DIR/$ARCHIVE_NAME_GECKO $BUILD_DIR/vendor/
+mv $CACHE_DIR/$ARCHIVE_NAME_GECKO $BUILD_DIR/vendor/$ARCHIVE_NAME_GECKO
 
 echo "----> Setting paths"
 mkdir -p $BUILD_DIR/.profile.d
