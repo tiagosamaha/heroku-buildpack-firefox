@@ -33,23 +33,34 @@ if ! [ -e $CACHE_DIR/$FILE_NAME_GECKO ]; then
 fi
 
 echo "-----> Extracting Firefox binaries to ${BUILD_DIR}/vendor/${ARCHIVE_NAME}"
+echo "-----> INOF HOME: ${HOME}"
 mkdir -p $CACHE_DIR/$ARCHIVE_NAME
-mkdir -p $BUILD_DIR/vendor
+mkdir -p $HOME/vendor
 tar jxf $CACHE_DIR/$FILE_NAME -C $CACHE_DIR
-mv $CACHE_DIR/$ARCHIVE_NAME $BUILD_DIR/vendor/
+mv $CACHE_DIR/$ARCHIVE_NAME $HOME/vendor/
 
 
-echo "-----> Extracting Geckodriver binaries to ${BUILD_DIR}/vendor/${ARCHIVE_NAME_GECKO}"
+echo "-----> Extracting Geckodriver binaries to ${HOME}/vendor/${ARCHIVE_NAME_GECKO}"
 mkdir -p $CACHE_DIR/$ARCHIVE_NAME_GECKO
-mkdir -p $BUILD_DIR/vendor/$ARCHIVE_NAME_GECKO
+mkdir -p $HOME/vendor/$ARCHIVE_NAME_GECKO
 tar -xzf $CACHE_DIR/$FILE_NAME_GECKO -C $CACHE_DIR
-mv $CACHE_DIR/$ARCHIVE_NAME_GECKO $BUILD_DIR/vendor/$ARCHIVE_NAME_GECKO/
+mv $CACHE_DIR/$ARCHIVE_NAME_GECKO $HOME/vendor/$ARCHIVE_NAME_GECKO/
 
 echo "----> Setting paths"
 mkdir -p $BUILD_DIR/.profile.d
 cat <<EOF >$BUILD_DIR/.profile.d/000_paths.sh
+export PATH="\$HOME/vendor/firefox:\$HOME/vendor/geckodriver:\$PATH"
+export LD_LIBRARY_PATH="\$HOME/vendor/firefox:\$HOME/vendor/geckodriver:\$LD_LIBRARY_PATH"
+export LIBRARY_PATH="\$HOME/vendor/firefox:\$HOME/vendor/geckodriver:\$LIBRARY_PATH"
+export TMPDIR="\$HOME/tmp"
+EOF
+
 export PATH="\$BUILD_DIR/vendor/firefox:\$BUILD_DIR/vendor/geckodriver:\$PATH"
 export LD_LIBRARY_PATH="\$BUILD_DIR/vendor/firefox:\$BUILD_DIR/vendor/geckodriver:\$LD_LIBRARY_PATH"
 export LIBRARY_PATH="\$BUILD_DIR/vendor/firefox:\$BUILD_DIR/vendor/geckodriver:\$LIBRARY_PATH"
 export TMPDIR="\$BUILD_DIR/tmp"
-EOF
+
+#give environment to later buildpacks
+export | grep -E -e ' (PATH|LD_LIBRARY_PATH|LIBRARY_PATH|INCLUDE_PATH|CPATH|CPPPATH|PKG_CONFIG_PATH)='  > "$LP_DIR/export"
+
+
