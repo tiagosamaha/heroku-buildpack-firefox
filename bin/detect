@@ -1,5 +1,6 @@
-#!/bin/sh
+#!/usr/bin/env bash
+# bin/detect <build-dir>
 
-echo "firefox"
+echo "Firefox"
 echo "geckodriver"
 exit 0
