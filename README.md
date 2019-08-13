@@ -16,3 +16,8 @@ $ heroku buildpacks:add https://github.com/evosystem-jp/heroku-buildpack-firefox
 
 $ git push heroku master
 ```
+
+Then, set Selenium configuration to below and launch.
+
+- geckodriver path to `/app/vendor/geckodriver/geckodriver`
+- firefox binary path to `/app/vendor/firefox/firefox`

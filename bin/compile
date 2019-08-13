@@ -53,8 +53,6 @@ case "$STACK" in
     PACKAGES="libxss1"
     ;;
   "heroku-16" | "heroku-18")
-    # the package list is found by using ci:debug then running ldd $GOOGLE_CHROME_BIN | grep not
-    # also look here for more packages/notes https://developers.google.com/web/tools/puppeteer/troubleshooting
     PACKAGES="
       libappindicator1
       libasound2
@@ -184,3 +182,7 @@ mkdir -p $BUILD_DIR/.fonts
 ls $FONTS_DIR
 cp $FONTS_DIR/* $BUILD_DIR/.fonts/
 fc-cache -f $BUILD_DIR/.fonts
+
+# Export the firefox binary location, so it's easier to tell geckodriver
+# about the non-standard location
+export FIREFOX_BIN="\$BUILD_DIR/vendor/firefox/firefox"
