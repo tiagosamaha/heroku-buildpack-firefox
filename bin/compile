@@ -32,20 +32,8 @@ function indent() {
   esac
 }
 
-# config
-VERSION_FIREFOX=57.0.1
-LANG=en-US
-PLATFORM=linux64
-
-VERSION_GECKODRIVER=0.19.1
-
-# Buildpack URL
-ARCHIVE_NAME_FIREFOX=firefox
-ARCHIVE_NAME_GECKODRIVER=geckodriver
-FILE_NAME_FIREFOX=${ARCHIVE_NAME_FIREFOX}-${VERSION_FIREFOX}.tar.bz2
-FILE_NAME_GECKODRIVER=${ARCHIVE_NAME_GECKODRIVER}-v${VERSION_GECKODRIVER}-${PLATFORM}.tar.gz
-BUILDPACK_FIREFOX_PACKAGE="https://download.mozilla.org/?product=firefox-${VERSION_FIREFOX}-SSL&os=${PLATFORM}&lang=${LANG}"
-BUILDPACK_GECKODRIVER_PACKAGE="https://github.com/mozilla/geckodriver/releases/download/v${VERSION_GECKODRIVER}/${FILE_NAME_GECKODRIVER}"
+BUILDPACK_FIREFOX_PACKAGE="https://download.mozilla.org/?product=firefox-latest&os=linux64"
+BUILDPACK_GECKODRIVER_PACKAGE="https://github.com/mozilla/geckodriver/releases/download/v0.29.1/geckodriver-v0.29.1-linux64.tar.gz"
 
 # Install correct dependencies according to $STACK
 case "$STACK" in
@@ -54,29 +42,43 @@ case "$STACK" in
     ;;
   "heroku-16" | "heroku-18")
     PACKAGES="
-      libappindicator1
+      gconf-service
       libasound2
       libatk1.0-0
-      libatk-bridge2.0-0
-      libcairo-gobject2
+      libc6
+      libcairo2
+      libcups2
+      libdbus-1-3
+      libexpat1
+      libfontconfig1
+      libgcc1
       libgconf-2-4
+      libgdk-pixbuf2.0-0
+      libglib2.0-0
       libgtk-3-0
-      libice6
       libnspr4
-      libnss3
-      libsm6
+      libpango-1.0-0
+      libpangocairo-1.0-0
+      libstdc++6
+      libx11-6
       libx11-xcb1
+      libxcb1
       libxcomposite1
       libxcursor1
       libxdamage1
+      libxext6
       libxfixes3
       libxi6
-      libxinerama1
       libxrandr2
+      libxrender1
       libxss1
-      libxt6
       libxtst6
+      ca-certificates
       fonts-liberation
+      libappindicator1
+      libnss3
+      lsb-release
+      xdg-utils
     "
     ;;
   *)
