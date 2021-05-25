@@ -32,8 +32,13 @@ function indent() {
   esac
 }
 
+ARCHIVE_NAME_FIREFOX=firefox
+ARCHIVE_NAME_GECKODRIVER=geckodriver
+FILE_NAME_FIREFOX=FirefoxSetup.tar.bz2
+FILE_NAME_GECKODRIVER=geckodriver-v0.29.1-linux64.tar.gz
+
 BUILDPACK_FIREFOX_PACKAGE="https://download.mozilla.org/?product=firefox-latest&os=linux64"
-BUILDPACK_GECKODRIVER_PACKAGE="https://github.com/mozilla/geckodriver/releases/download/v0.29.1/geckodriver-v0.29.1-linux64.tar.gz"
+BUILDPACK_GECKODRIVER_PACKAGE="https://github.com/mozilla/geckodriver/releases/download/v0.29.1/${FILE_NAME_GECKODRIVER}"
 
 # Install correct dependencies according to $STACK
 case "$STACK" in
